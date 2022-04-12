@@ -13,4 +13,15 @@ class AlunoController extends AbstractActionController
     {
         return new ViewModel();
     }
+
+    public function editarAction()
+    {
+        return new ViewModel();
+    }
+
+    public function gravarAction()
+    {
+        
+    }
+
 }

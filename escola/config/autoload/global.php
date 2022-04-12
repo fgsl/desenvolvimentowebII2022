@@ -13,5 +13,14 @@
  */
 
 return [
-    // ...
+    'conexao' => Laminas\Db\Adapter\AdapterServiceFactory::class
+
+
+
+
+
+
+
+
+
 ];
