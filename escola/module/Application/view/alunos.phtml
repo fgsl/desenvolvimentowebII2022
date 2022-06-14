@@ -1,0 +1,11 @@
+<tr>
+<td><a href="<?=$this->url('alunos',[
+        'action' => 'editar',
+        'matricula' => $this->matricula
+    ])?>"><?=$this->matricula?></a></td>
+    <td> <?=$this->nome ?> </td>
+    <td><a href="<?=$this->url('alunos',[
+        'action' => 'excluir',
+        'matricula' => $this->matricula
+    ])?>">Excluir</a></td>
+</tr>

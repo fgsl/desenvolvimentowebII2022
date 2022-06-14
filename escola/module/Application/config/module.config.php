@@ -34,7 +34,7 @@ return [
             'alunos' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/alunos[/:action]',
+                    'route' => '/alunos[/:action[/:matricula]]',
                     'defaults' => [
                         'controller' => Controller\AlunoController::class,
                         'action' => 'index'
@@ -46,7 +46,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
-            Controller\AlunoController::class => InvokableFactory::class
+            Controller\AlunoController::class => Controller\AlunoControllerFactory::class
         ],
     ],
     'view_manager' => [

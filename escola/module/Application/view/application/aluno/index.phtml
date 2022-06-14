@@ -2,8 +2,23 @@
 
 <p><a href="<?=$this->url('alunos',[
     'action' => 'editar'
-])?>">Incluir aluno</a></p>
+])?>">Incluir Aluno</a></p>
 
+<h2>Alunos </h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Matrícula</th>
+            <th>Nome</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+echo $this -> partialLoop('alunos.phtml', $this -> alunos);
+?>        
+    </tbody>
+
+</table>
 
 <a href="<?=$this->url('home')?>"
->Voltar</a>
+>   Voltar</a>

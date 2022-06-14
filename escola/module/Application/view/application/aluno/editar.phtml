@@ -1,8 +1,13 @@
-<h1>Inclusão de aluno</h1>
+<h1><?=(empty($this->aluno->matricula)?
+'Inclusão': 'Alteração')?> de Aluno</h1>
+
 <form action="<?=$this->url('alunos',[
     'action' => 'gravar'
 ])?>" method="post">
-Nome: <input type="text" name="nome"
-autofocus="autofocus">
-<input type="submit" value="gravar">    
-</form>    
+    Nome: <input type="text" name="nome"
+    autofocus="autofocus" 
+    value="<?=$this->aluno->nome?>">
+    <input type="hidden" name="matricula"
+    value="<?=$this->aluno->matricula?>">
+    <input type="submit" value="gravar">
+</form>
