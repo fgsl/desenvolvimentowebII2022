@@ -1,0 +1,18 @@
+<h1><?=(empty($this->artista->codigo)?
+'Inclusão': 'Alteração')?> de Artista</h1>
+<p>
+<form action="<?=$this->url('artistas',[
+    'action' => 'gravar'
+])?>" method="post">
+    Nome: <input type="text" name="nome"
+    autofocus="autofocus" 
+    value="<?=$this->artista->nome?>">
+    <input type="hidden" name="codigo"
+    value="<?=$this->artista->codigo?>">
+    <input type="submit" value="Gravar" class="btn btn-primary"  style="height: 40px;">
+</form>
+</p>
+<p>
+<a href="<?=$this->url('artistas')?>" class="btn btn-info"
+>   Voltar</a>
+</p>

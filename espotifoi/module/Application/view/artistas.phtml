@@ -1,0 +1,82 @@
+<tr>
+     <td width="150"><?= $this->codigo ?></td>
+     <td width="150"><?= $this->nome ?></td>
+     <td width="150"><a href="<?= $this->url('artistas', ['action' => 'excluir', 'codigo' => $this->codigo]) ?>" data-confirm='Tem certeza de que deseja excluir o item selecionado?' class="btn btn-danger" style="height: 45px;">Excluir</a> 
+                    <a href="<?= $this->url('artistas', ['action' => 'editar', 'codigo' => $this->codigo]) ?>" class="btn btn-warning" style="height: 45px;"> Editar</a>
+                    <a href="<?= $this->url('artistas', ['action' => 'musica', 'codigo' => $this->codigo]) ?>"  class="btn btn-success" style="height: 45px;" musica-lista="lista<?=$this->codigo?>"  data-toggle="modal" data-target="#modalExemplo">Musicas</a>
+     </td>
+
+</tr>
+<script>
+     var buscarMusicas<?=$this->codigo?> = function(){
+          $.ajax({'url':'artistas/musica/' + <?=$this->codigo?>})
+          .done(function(response){
+               var page = `
+  <html>  
+  <head>
+  </head>
+  <body>             
+  <div class="modal fade-lg " id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel"><b><?= $this->nome ?></b></h5>
+        <table class="table">
+      <thead>
+      <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      </tr>
+      </thead>
+      <tbody id="tbody_musicas">
+      </tbody>
+      </table>        
+       </div>
+      <div class="modal-body">
+
+        </div>
+       </div>
+      </div>
+     </div>               
+     </body>
+     </html>
+`;
+               musicas = response['musicas'];
+               var n = musicas.length;
+               var newWindow = window.open("", "musicas", "width=300,height=300");
+               newWindow.document.write(page);
+               tbody = newWindow.document.getElementById('tbody_musicas');
+               tbody.innerHTML = "";
+               for(i=0;i<n;i++){
+                    tr = newWindow.document.createElement('tr');
+                    tbody.appendChild(tr);
+                    td = newWindow.document.createElement('td');                    
+                    tr.appendChild(td);
+                    node = newWindow.document.createTextNode(musicas[i]['codigo']);
+                    td.appendChild(node);
+                    td = newWindow.document.createElement('td');                    
+                    tr.appendChild(td);
+                    node = newWindow.document.createTextNode(musicas[i]['nome']);
+                    td.appendChild(node);
+               }
+          });     
+     };
+
+     $(document).ready(function() {          
+          $('a[musica-lista="lista<?=$this->codigo?>"').click(function(){
+               buscarMusicas<?=$this->codigo?>();
+          });
+          $('a[data-confirm]').click(function(ev) {
+               var href = $(this).attr('href');
+               if (!$('#confirm-delete').length) {
+                    $('table').append('<div class="modal fade" id="confirm-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog">  <div class="modal-content">  <div class="modal-header bg-danger text-white">EXCLUIR ITEM <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="text-danger"><b>Tem certeza de que deseja excluir o item selecionando?</b></div><div class="modal-footer"><button type="button" class="btn btn-success" data-dismiss="modal">Cancelar</button><a class="btn btn-danger text-white" id="dataComfirmOK">Apagar</a></div></div></div></div>');
+               }
+               $('#dataComfirmOK').attr('href', href);
+               $('#confirm-delete').modal({shown: true});
+               return false;
+          });
+     });   
+</script>
+
+
+

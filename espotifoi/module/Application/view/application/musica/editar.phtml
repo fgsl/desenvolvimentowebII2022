@@ -1,0 +1,25 @@
+
+<h1><?=(empty($this->musica->codigo)?
+'Inclusão': 'Alteração')?> de Musicas</h1>
+
+
+<form action="<?=$this->url('musicas',['action' => 'gravar'])?>" method="post" id="musica">
+   <label for="nome">Nome:</label> 
+   <input type="text" name="nome" autofocus="autofocus" value="<?=$this->musica->nome?>">
+   <input type="hidden" name="codigo" value="<?=$this->musica->codigo?>">
+   <input type="submit" value="Gravar"  class="btn btn-primary"  >
+</form>
+
+<label for="artista">Artista</label>
+<select id="artista" name="artista" form="musica">
+<?php
+$this->placeholder('musica')->musica = $this->musica;
+$this->partialLoop()->setObjectKey('artista');
+echo $this->partialLoop('lista_de_artistas.phtml',$this->artistas);
+?>
+</select>
+
+
+<p> <a href="<?=$this->url('musicas')?>" class="btn btn-info"
+>   Voltar</a></p>
+
