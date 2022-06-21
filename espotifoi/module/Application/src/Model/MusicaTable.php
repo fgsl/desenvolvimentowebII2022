@@ -61,7 +61,20 @@ class MusicaTable {
         return $musica;
     }
 
+    public function buscarMusicaPorNome($nome)
+    {
+        $musicas = $this->tableGateway->select(['nome' => $nome ]);
+        
+        if ($musicas->count() > 0){
 
+            return $musicas->current();
 
-    
+        }
+
+        $musica = new \StdClass();
+        $musica->codigo = 0;
+        $musica->nome = "";
+        $musica->codigo_artista = 0;
+        return $musica;
+    }
 }

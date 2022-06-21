@@ -47,7 +47,19 @@ class ArtistaTable {
         return $artista;
     }
 
+    public function buscarArtistaPorNome($nome)
+    {
+        $artistas = $this->tableGateway->select([ 'nome' => $nome]);
+       
+        if ($artistas->count() > 0){
+            return $artistas->current();
+        }
 
+        $artista = new \StdClass();
+        $artista->codigo = 0;
+        $artista->nome="";
+        return $artista;
+    }    
 
 
 

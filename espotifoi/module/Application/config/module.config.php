@@ -54,12 +54,6 @@ return [
             ],
         ],
     ],
-
-
-
-
-
-
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
@@ -86,4 +80,10 @@ return [
             'ViewJsonStrategy'
         ]
     ],
+    'service_manager' => [
+        'factories' => [
+            'ArtistaTable' => Application\Model\ArtistaTableFactory::class,
+            'MusicaTable' => Application\Model\MusicaTableFactory::class,
+        ]
+    ]
 ];
